@@ -1,0 +1,29 @@
+{
+  "name": "if-quest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svetlana-tyshkevich/IF-quest.git"
+  },
+  "keywords": [
+    "quest",
+    "interaction",
+    "nodejs",
+    "patterns"
+  ],
+  "author": "svetlana-tyshkevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svetlana-tyshkevich/IF-quest/issues"
+  },
+  "homepage": "https://github.com/svetlana-tyshkevich/IF-quest#readme",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  }
+}
