@@ -25,5 +25,8 @@
   "homepage": "https://github.com/svetlana-tyshkevich/IF-quest#readme",
   "devDependencies": {
     "prettier": "3.2.5"
+  },
+  "dependencies": {
+    "inquirer": "^9.2.16"
   }
 }
