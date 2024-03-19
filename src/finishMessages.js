@@ -1,4 +1,5 @@
-export const negativeFinish = ''
+export const negativeFinish = '(ㅠ﹏ㅠ)'
+
 export const positiveFinish = '          |\n' +
     '        \\ _ /\n' +
     '      -= (_) =-\n' +

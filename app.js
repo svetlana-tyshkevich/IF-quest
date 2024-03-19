@@ -10,8 +10,15 @@ const playScene = async () => {
     const currentScene = new Scene(promptStrategy);
 
     if (currentLevel.question && currentLevel.variants.length) {
+        let nextStepIndex;
         const answer = await currentScene.getScene(currentLevel);
-        state.setNextLevel(answer.choice);
+        if (currentLevel.isInput) {
+            const answerIsCorrect = answer.choice.toLowerCase() === currentLevel.inputAnswer.toLowerCase();
+            nextStepIndex = answerIsCorrect ? 0 : 1;
+        } else {
+            nextStepIndex = answer.choice;
+        }
+        state.setNextLevel(nextStepIndex);
         await playScene();
     } else {
         if (currentLevel.isFinish === 'negative') {

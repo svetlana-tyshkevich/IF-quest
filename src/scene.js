@@ -24,7 +24,7 @@ export class Scene {
 }
 
 export const promptStrategy = async (level) => {
-    return inquirer.prompt([getPrompt(level)]);
+    return inquirer.prompt(getPrompt(level));
 
 };
 
