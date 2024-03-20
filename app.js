@@ -1,3 +1,4 @@
+import { WordWrapDecorator } from './src/decorators.js';
 import { scenario } from './src/scenario.js';
 import { negativeFinishStrategy, positiveFinishStrategy, promptStrategy, Scene } from './src/scene.js';
 import { State } from './src/State.js';
@@ -7,7 +8,8 @@ let state = new State(scenario);
 
 const playScene = async () => {
     const currentLevel = state.getCurrentLevel();
-    const currentScene = new Scene(promptStrategy);
+    let currentScene = new Scene(promptStrategy);
+    currentScene = new WordWrapDecorator(currentScene);
 
     if (currentLevel.question && currentLevel.variants.length) {
         let nextStepIndex;
