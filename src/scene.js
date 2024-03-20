@@ -2,8 +2,19 @@ import inquirer from 'inquirer';
 import { negativeFinish, positiveFinish } from './finishMessages.js';
 import { getPrompt } from './getPrompt.js';
 
-export class Scene {
+export class SceneInterface {
+
+    setStrategy(strategy) {
+    }
+
+    displayLevelInfo(level) {}
+
+    getScene(level) {}
+}
+
+export class Scene extends SceneInterface{
     constructor(strategy) {
+        super();
         this.strategy = strategy;
     }
 

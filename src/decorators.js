@@ -1,4 +1,4 @@
-import { Scene } from './scene.js';
+import { Scene, SceneInterface } from './scene.js';
 
 function wordWrap(description) {
     const words = description.split(' ');
@@ -20,17 +20,18 @@ function wordWrap(description) {
     return lines.join('\n');
 }
 
-export class WordWrapDecorator extends Scene{
+export class WordWrapDecorator extends SceneInterface {
     constructor(decorated) {
         super();
         this.decorated = decorated;
     }
 
-    displayLevelInfo(level) {
-        level.description = wordWrap(level.description)
-        this.decorated.displayLevelInfo(level);
+    getScene(level) {
+        level.description = wordWrap(level.description);
+       return this.decorated.getScene(level);
     }
-    async getScene(level) {
-        return await this.decorated.getScene(level);
+
+    setStrategy(strategy) {
+        this.decorated.setStrategy(strategy);
     }
 }
