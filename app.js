@@ -1,17 +1,36 @@
-import { stdin as input, stdout as output } from 'node:process';
-import * as readline from 'node:readline/promises';
+import { WordWrapDecorator } from './src/decorators.js';
+import { scenario } from './src/scenario.js';
+import { negativeFinishStrategy, positiveFinishStrategy, promptStrategy, Scene } from './src/scene.js';
+import { State } from './src/State.js';
 
-const rl = readline.createInterface({ input, output });
+let state = new State(scenario);
 
-rl.on('line', async (line) => {
-    try {
-        console.log(line);
-    } catch {
-        console.log('Что-то пошло не так. Игра окончена!');
-        rl.close();
+
+const playScene = async () => {
+    const currentLevel = state.getCurrentLevel();
+    let currentScene = new Scene(promptStrategy);
+    currentScene = new WordWrapDecorator(currentScene);
+
+    if (currentLevel.question && currentLevel.variants.length) {
+        let nextStepIndex;
+        const answer = await currentScene.getScene(currentLevel);
+        if (currentLevel.isInput) {
+            const answerIsCorrect = answer.choice.toLowerCase() === currentLevel.inputAnswer.toLowerCase();
+            nextStepIndex = answerIsCorrect ? 0 : 1;
+        } else {
+            nextStepIndex = answer.choice;
+        }
+        state.setNextLevel(nextStepIndex);
+        await playScene();
+    } else {
+        if (currentLevel.isFinish === 'negative') {
+            currentScene.setStrategy(negativeFinishStrategy);
+            await currentScene.getScene(currentLevel);
+        } else {
+            currentScene.setStrategy(positiveFinishStrategy);
+            await currentScene.getScene(currentLevel);
+        }
     }
-});
+};
 
-rl.on('SIGINT', () => {
-    rl.close();
-});
+await playScene();
